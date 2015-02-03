@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Afrxx091dv450Lab1</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>API KEY 'n' s</title>
+  <%= stylesheet_link_tag 'application', '//fonts.googleapis.com/css?family=Open+Sans' %>
+  <%= stylesheet_link_tag 'application', '//fonts.googleapis.com/css?family=Oswald' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% flash.each do |t, m| %>
-	<div class="flash-<%= t %>"><%= m %></div>
-<% end %>
-<%= yield %>
-
+<div id="wrap">
+  <%= render 'layouts/header' %>
+	<div id="main">
+		<%= render 'shared/flash_messages' %>
+		<%= yield %>
+	</div>
+  	<%= debug(params) if Rails.env.development? %>)
+</div>
 </body>
 </html>
