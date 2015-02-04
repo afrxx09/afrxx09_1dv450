@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203213001) do
+ActiveRecord::Schema.define(version: 20150204103451) do
+
+  create_table "api_keys", force: true do |t|
+    t.string   "key"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "api_keys", ["user_id", "key"], name: "index_api_keys_on_user_id_and_key"
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -20,7 +30,6 @@ ActiveRecord::Schema.define(version: 20150203213001) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "api_key"
     t.string   "remember_digest"
   end
 

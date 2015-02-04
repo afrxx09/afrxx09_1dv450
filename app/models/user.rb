@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_one :api_key, dependent: :destroy
 	attr_accessor :remember_token
 	has_secure_password
 	before_save { email.downcase! }

@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 	get 'sign_in' => 'sessions#new'
 	post 'sign_in' => 'sessions#create'
 	delete 'sign_out' => 'sessions#destroy'
-	resources :users
+	resources :users, only: [:index, :new, :create, :show]
+	resources :api_keys, only: [:generate, :destroy]
 end

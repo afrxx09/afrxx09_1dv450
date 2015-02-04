@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :singed_in_user, only:[:show]
 	def show
 		@user = User.find(params[:id])
 	end
@@ -7,7 +8,6 @@ class UsersController < ApplicationController
 	end
 	def create
 		@user = User.new(user_params)
-		#@user.api_key = Digest::MD5::hexdigest(@user.email.downcase + Time.now.to_i.to_s);
 		if @user.save
 			sign_in @user
 			flash[:success] = 'Sign up successful!'
