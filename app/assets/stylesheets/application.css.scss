@@ -145,15 +145,53 @@ button.blue:focus{
     clear:both;
 }
 
+/* columns */
+.row{
+    width:100%;
+    float:left;
+}
+.row:before,
+.row:after{
+    clear:both;
+    display: table;
+    content: " ";
+}
+
+.row .col-12{
+    width:100%;
+    float:left;
+}
+.row .col-9{
+    width:75%;
+    float:left;
+}
+.row .col-6{
+    width:50%;
+    float:left;
+}
+.row .col-3{
+    width:25%;
+    float:left;
+}
+
 /* layout */
 #wrap{
     width:1000px;
     margin:0 auto;
 }
+#header{
+    background-color:#4A0060;
+    padding:0 20px;
+}
+#header h1{
+    display:inline-block;
+    float:left;
+    color:#fff;
+}
 
 #nav ul{
     float:left;
-    width:100%;
+    display:inline-block;
     list-style:none;
 }
 
@@ -164,10 +202,19 @@ button.blue:focus{
     display:block;
     padding:.5em 2em;
     text-decoration:none;
-    color:$blue-6;
+    color:#fff;
     font-weight:bold;
 }
+#nav ul li a:hover{
+    border-bottom:1px solid #fff;
+}
 
+#main:before,
+#main:after{
+    clear:both;
+    display: table;
+    content: " ";
+}
 
 /* Flash messages */
 .flash{

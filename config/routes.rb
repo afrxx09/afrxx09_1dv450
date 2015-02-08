@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-	root 'static#index'
+  get 'static_pages/home'
+
+	root 'static_pages#home'
 	get 'sign_up' => 'users#new'
 	get 'sign_in' => 'sessions#new'
 	post 'sign_in' => 'sessions#create'
