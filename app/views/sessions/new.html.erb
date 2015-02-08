@@ -1,14 +1,20 @@
 <div>
 	<%= form_for :session, url: sign_in_path do |f| %>
-		<%= f.label :email %>
-		<%= f.email_field :email %>
-
-		<%= f.label :password %>
-		<%= f.password_field :password %>
-
-	  	<%= f.check_box :remember_me %>
-	  	<%= f.label :remember_me, 'Remember me!' %>
-		<%= f.submit 'Sign in' %>
+		<div>
+			<%= f.label :email %><br />
+			<%= f.email_field :email %>
+		</div>
+		<div>
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
+		</div>
+		<div>
+	  		<%= f.check_box :remember_me %>
+	  		<%= f.label :remember_me, 'Remember me!' %>
+	  	</div>
+		<div>
+			<%= f.submit 'Sign in', class: 'blue' %>
+		</div>
 	<% end %>
 
 	<p><%= link_to 'Sign up!', sign_up_path %></p>

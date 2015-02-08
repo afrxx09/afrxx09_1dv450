@@ -1,9 +1,12 @@
 <h2>Profile</h2>
 <p><%= @user.first_name %> <%= @user.last_name %></p>
 <p>API KEY:
-  <% if !@user.api_key.nil %>
+  <% if !@user.api_key.nil? %>
 	  <%= @user.api_key.key %>
+	  <%= link_to('Generate new API-key', generate_key_path, :class => 'button button-blue', method: :post) %> 
+	  <%= link_to('Delete API-key', destroy_key_path(@user.id), :class => 'button button-red', method: :delete) %>
   <% else %>
-	  <%= link_to('Generate API-key') %>
+	  <%= link_to('Generate API-key', generate_key_path, :class => 'button button-blue', method: :post) %>
+	  
   <%end%>
 </p>

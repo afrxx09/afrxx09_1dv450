@@ -5,22 +5,29 @@
   <div class="">
 	<%= form_for(@user) do |f| %>
 		<%= render 'shared/form_errors', object: f.object %>
-		<%= f.label :first_name %>
-		<%= f.text_field :first_name %>
-
-		<%= f.label :last_name %>
-		<%= f.text_field :last_name %>
-
-		<%= f.label :email %>
-		<%= f.email_field :email %>
-
-		<%= f.label :password %>
-		<%= f.password_field :password %>
-
-		<%= f.label :password_confirmation, "Confirm Password" %>
-		<%= f.password_field :password_confirmation %>
-
-		<%= f.submit "Sign up", class: "" %>
+		<div>
+			<%= f.label :first_name %><br />
+			<%= f.text_field :first_name %>
+		</div>
+		<div>
+			<%= f.label :last_name %><br />
+			<%= f.text_field :last_name %>
+		</div>
+		<div>
+			<%= f.label :email %><br />
+			<%= f.email_field :email %>
+		</div>
+		<div>
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
+		</div>
+		<div>
+			<%= f.label :password_confirmation, "Confirm Password" %><br />
+			<%= f.password_field :password_confirmation %>
+		</div>
+		<div>
+			<%= f.submit "Sign up", class: "blue" %>
+		</div>
 	<% end %>
   </div>
 </div>

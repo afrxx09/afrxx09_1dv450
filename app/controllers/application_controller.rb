@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
     def singed_in_user
-      unless singed_in?
+      unless signed_in?
         flash[:fail] = "Please sign in"
         redirect_to sign_in_path
       end

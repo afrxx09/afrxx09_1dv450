@@ -1,0 +1,256 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+$red-7: #7D000B;
+$red-6: #A10917;
+$red-5: #C21B2C;
+$red-4: #DE4250;
+$red-3: #DE4250;
+$red-2: #DE5F6C;
+$red-1: #DE828C;
+$red-0: #FFCDD6;
+
+$green-7: #028A00;
+$green-6: #02BF00;
+$green-5: #2ADB30;
+$green-4: #4BBF50;
+$green-3: #6CFF69;
+$green-2: #9BFF9D;
+$green-1: #BEFFC0;
+$green-0: #D4FFD4;
+ 
+$blue-7: #006A94;
+$blue-6: #0080B2;
+$blue-5: #0094CF;
+$blue-4: #45A6CF;
+$blue-3: #5EC0F0;
+$blue-2: #9AD3F0;
+$blue-1: #C5F3FF;
+$blue-0: #DBF7FF;
+
+ 
+ 
+html *{
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Open Sans", sans-serif;
+    line-height:1.25em;
+}
+
+h1, h2,h3,h4,h5,h6{
+    font-family:"Oswald", sans-serif;
+    margin:.5em 0;
+}
+p{
+    margin:1em 0;
+}
+a{
+    color:$blue-7;
+}
+
+ul{
+    margin-left:1em;
+}
+
+/* form stuff */
+label{
+    display:inline-block;
+    font-weight:bold;
+    margin-top:.5em;
+}
+input{
+    display:inline-block;
+    margin:.15em 0;
+}
+input:focus{
+    outline:none;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+    padding:.25em .45em;
+    background-color:#f6f6f6;
+    border:1px solid #bbb;
+    font-size:1.05em;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus{
+    background-color:$blue-0;
+    border:1px solid $blue-3;
+}
+
+
+input[type="checkbox"],
+input[type="radio"]{
+    margin:.5em .5em 0 .5em;
+}
+input[type="checkbox"]:focus,
+input[type="radio"]:focus{
+    margin:.5em .5em 0 .5em;
+    border:1px solid #00b;
+}
+
+input[type="submit"],
+button{
+    display:inline-block;
+    margin:.5em 0;
+    padding:.5em 2em;
+    background-color:#ddd;
+    border:1px solid #bbb;
+    font-size:1.05em;
+    text-decoration:none;
+    color:inherit;
+    font-weight:bold;
+}
+input[type="submit"]:hover,
+button:hover,
+input[type="submit"]:focus,
+button:focus{
+    background-color:#eee;
+    border:1px solid #ccc;
+}
+
+input[type="submit"].blue,
+button.blue{
+    background-color:$blue-5;
+    border:1px solid $blue-7;
+    color:#fff;
+}
+input[type="submit"].blue:hover,
+button.blue:hover,
+input[type="submit"].blue:focus,
+button.blue:focus{
+    background-color:$blue-4;
+    border:1px solid $blue-6;
+}
+
+/* generic classes */
+.clear{
+    clear:both;
+}
+
+/* layout */
+#wrap{
+    width:1000px;
+    margin:0 auto;
+}
+
+#nav ul{
+    float:left;
+    width:100%;
+    list-style:none;
+}
+
+#nav ul li{
+    float:left;
+}
+#nav ul li a{
+    display:block;
+    padding:.5em 2em;
+    text-decoration:none;
+    color:$blue-6;
+    font-weight:bold;
+}
+
+
+/* Flash messages */
+.flash{
+    display:block;
+    padding:1em .5em;
+    margin:.5em 0;
+    color:#eee;
+}
+.flash p{
+    margin:0;
+}
+
+.flash.flash-fail{
+    background-color:$red-5;
+    border:1px solid $red-7;
+}
+.flash.flash-success{
+    background-color:$green-5;
+    border:1px solid $green-7;
+}
+
+.flash .flash-close{
+    display:inline-block;
+    float:right;
+    width:20px;
+    height:20px;
+    border:1px solid #000;
+    background-image:image-url('close-icon.png');
+    background-size:16px;
+    background-repeat:no-repeat;
+    background-position:center;
+    cursor:pointer;
+}
+
+/* Form errors */
+.form-errors{
+    color:#900;
+}
+
+.form-error{
+    margin:.5em 0;
+    padding:.5em;
+    background:#fdd;
+}
+
+.button{
+    display:inline-block;
+    padding:5px 15px;
+    margin:0 5px;
+    background-color:#ddd;
+    border:1px solid #bbb;
+    text-decoration:none;
+    color:inherit;
+}
+.button:hover{
+    background-color:#eee;
+    border:1px solid #ccc;
+}
+
+.button.button-red{
+    background-color:$red-5;
+    border:1px solid $red-7;
+    color:#fff;
+}
+.button.button-red:hover{
+    background-color:$red-4;
+    border:1px solid $red-6;
+}
+.button.button-blue{
+    background-color:$blue-5;
+    border:1px solid $blue-7;
+    color:#fff;
+}
+.button.button-blue:hover{
+    background-color:$blue-4;
+    border:1px solid $blue-6;
+}
+.button.button-green{
+    background-color:$green-5;
+    border:1px solid $green-7;
+    color:#fff;
+}
+.button.button-green:hover{
+    background-color:$green-4;
+    border:1px solid $green-6;
+}

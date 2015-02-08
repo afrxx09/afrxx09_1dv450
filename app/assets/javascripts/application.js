@@ -14,3 +14,24 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var app = {
+	init : function(){
+		flash.init();
+	}
+};
+
+var flash = {
+	init : function(){
+		this.binds();
+	},
+	binds : function(){
+		$('body').on('click', '.flash-close', function(e){
+			$(this).closest('.flash').fadeOut(150);
+		});
+	}
+};
+
+$(document).ready(function(){
+	app.init();
+});

@@ -3,7 +3,7 @@ class ApiKey < ActiveRecord::Base
   validates :user_id, presence: true
   validates :key, presence: true
 
-  def ApiKey.generate
-    Digest::MD5::hexdigest(self.user.email.downcase + Time.now.to_i.to_s);
+  def self.generate user
+    Digest::MD5::hexdigest(user.email.downcase + Time.now.to_i.to_s);
   end
 end
