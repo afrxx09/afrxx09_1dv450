@@ -11,3 +11,7 @@
 
 ###Logga in
 För admin-konto: "admin@test.com" / "password"
+
+###Live-version
+Finns på heroku men garanterar inte att den fungerar där då det ofta krånglar:
+[https://pure-wave-9829.herokuapp.com/](https://pure-wave-9829.herokuapp.com/)
