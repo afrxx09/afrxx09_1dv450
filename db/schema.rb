@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204103451) do
+ActiveRecord::Schema.define(version: 20150210092300) do
 
   create_table "api_keys", force: true do |t|
     t.string   "key"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150204103451) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_digest"
+    t.boolean  "admin",           default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

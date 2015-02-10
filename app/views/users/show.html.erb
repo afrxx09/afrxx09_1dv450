@@ -1,12 +1,46 @@
-<h2>Profile</h2>
-<p><%= @user.first_name %> <%= @user.last_name %></p>
-<p>API KEY:
-  <% if !@user.api_key.nil? %>
-	  <%= @user.api_key.key %>
-	  <%= link_to('Generate new API-key', generate_key_path, :class => 'button button-blue', method: :post) %> 
-	  <%= link_to('Delete API-key', destroy_key_path(@user.id), :class => 'button button-red', method: :delete) %>
-  <% else %>
-	  <%= link_to('Generate API-key', generate_key_path, :class => 'button button-blue', method: :post) %>
-	  
-  <%end%>
-</p>
+<div class="row">
+	<div class="col w10">&nbsp;</div>
+	<div class="col w30">
+		<h2>Profile</h2>
+		<%= form_for(@user) do |f| %>
+			<%= render 'shared/form_errors', object: f.object %>
+			<div class="block-form">
+				<%= f.label :first_name %>
+				<%= f.text_field :first_name %>
+			</div>
+			<div class="block-form">
+				<%= f.label :last_name %>
+				<%= f.text_field :last_name %>
+			</div>
+			<div class="block-form">
+				<%= f.label :email %>
+				<%= f.email_field :email %>
+			</div>
+			<div class="block-form">
+				<%= f.label :password %>
+				<%= f.password_field :password %>
+			</div>
+			<div class="block-form">
+				<%= f.label :password_confirmation, "Confirm Password" %>
+				<%= f.password_field :password_confirmation %>
+			</div>
+			<div>
+				<%= f.submit "Save profile", class: "blue" %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col w10">&nbsp;</div>
+	<div class="col w50">
+		<h2>API KEY</h2>
+			<% if !@user.api_key.nil? %>
+				<p><%= @user.api_key.key %></p>
+				<p>
+					<%= link_to('Generate new API-key', api_keys_path, :class => 'button button-blue', method: :post) %> 
+					<%= link_to('Delete API-key', api_key_path(@user.id), :class => 'button button-red', method: :delete) %>
+				</p>
+			<% else %>
+				<p>currently no key</p>
+				<p><%= link_to('Generate API-key', api_keys_path, :class => 'button button-blue', method: :post) %></p>
+			<%end%>
+	</div>
+</div>

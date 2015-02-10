@@ -68,6 +68,27 @@ ul{
 }
 
 /* form stuff */
+.block-form{
+    padding:0 10px;
+}
+.block-form label{
+    display:block;
+    margin-left:-10px;
+}
+.block-form input[type="text"],
+.block-form input[type="password"],
+.block-form input[type="email"]{
+    width:100%;
+    display:block;
+    margin-left:-10px;
+}
+input[type="submit"].block,
+button.block{
+    display:block;
+    margin-left:-10px;
+}
+
+
 label{
     display:inline-block;
     font-weight:bold;
@@ -83,7 +104,7 @@ input:focus{
 input[type="text"],
 input[type="password"],
 input[type="email"]{
-    padding:.25em .45em;
+    padding:4px 8px;
     background-color:#f6f6f6;
     border:1px solid #bbb;
     font-size:1.05em;
@@ -157,23 +178,32 @@ button.blue:focus{
     content: " ";
 }
 
-.row .col-12{
-    width:100%;
+.row .col{
     float:left;
 }
-.row .col-9{
-    width:75%;
-    float:left;
-}
-.row .col-6{
-    width:50%;
-    float:left;
-}
-.row .col-3{
-    width:25%;
-    float:left;
-}
+.row .col.w100{width:100%;}
+.row .col.w90{width:90%;}
+.row .col.w80{width:80%;}
+.row .col.w75{width:75%;}
+.row .col.w70{width:70%;}
+.row .col.w60{width:60%;}
+.row .col.w50{width:50%;}
+.row .col.w40{width:40%;}
+.row .col.w30{width:30%;}
+.row .col.w25{width:25%;}
+.row .col.w20{width:20%;}
+.row .col.w10{width:10%;}
+.row .col.w5{width:5%;}
+.row .col.w2{width:2%;}
 
+/* Lists */
+.list div.row{
+    padding: 3px 6px;
+    background-color:#f6f6f6;
+}
+.list div.row:nth-child(even){
+    background-color:#e6e6e6;
+}
 /* layout */
 #wrap{
     width:1000px;

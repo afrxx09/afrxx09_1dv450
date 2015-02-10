@@ -1,11 +1,12 @@
 <div>
+	<h2>Sign in</h2>
 	<%= form_for :session, url: sign_in_path do |f| %>
-		<div>
-			<%= f.label :email %><br />
+		<div class="block-form">
+			<%= f.label :email %>
 			<%= f.email_field :email %>
 		</div>
-		<div>
-			<%= f.label :password %><br />
+		<div class="block-form">
+			<%= f.label :password %>
 			<%= f.password_field :password %>
 		</div>
 		<div>

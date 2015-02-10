@@ -1,9 +1,16 @@
 <div class="row">
-	<h2>Home</h2>
-	<div class="col-6">
-		API-KEY application
+	<div class="col w10">&nbsp;</div>
+	<div class="col w40">
+		<h2>Home</h2>
+		<p>API-KEY application</p>
 	</div>
-	<div class="col-6">
-		<%= render 'shared/sign_in_form' %>
+	<div class="col w10">&nbsp;</div>
+	<div class="col w30">
+		<% if signed_in? %>
+			<p>Signed in as <%= current_user.first_name + ' ' + current_user.last_name %></p>
+			<p><%= link_to 'Go to profile', user_path(current_user) %> to manage API-key</p>
+		<% else %>
+			<%= render 'shared/sign_in_form' %>
+		<% end %>
 	</div>
 </div>
