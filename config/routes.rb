@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  get 'static_pages/home'
-
+	namespace :api, defaults: {format: 'json'} do
+		namespace :v1 do
+			resources :users
+		end
+		#namespace :v2 do
+		#	resources :asd
+		#end
+	end
 	root 'static_pages#home'
 	get 'sign_up' => 'users#new'
 	get 'sign_in' => 'sessions#new'
