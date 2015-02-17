@@ -1,5 +1,5 @@
-class User < ActiveRecord::Base
-	has_one :api_key, dependent: :destroy
+class ApiUser < ActiveRecord::Base
+	has_many :api_applications, dependent: :destroy
 	attr_accessor :remember_token
 	has_secure_password
 	before_save { email.downcase! }
@@ -18,18 +18,18 @@ class User < ActiveRecord::Base
 		length: { minimum: 6 },
 		allow_blank: true
 
-	def User.digest string
+	def ApiUser.digest string
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 		BCrypt::Password.create string, cost:cost
 	end
 
-	def User.new_token
+	def ApiUser.new_token
 		SecureRandom.urlsafe_base64
 	end
 
 	def remember
-		self.remember_token = User.new_token
-		update_attribute(:remember_digest, User.digest(remember_token))
+		self.remember_token = ApiUser.new_token
+		update_attribute(:remember_digest, ApiUser.digest(remember_token))
 	end
 
 	def authenticated? remember_token

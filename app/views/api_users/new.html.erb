@@ -5,7 +5,7 @@
 	<div class="col w40">
 		<h2>Sign up</h2>
 		<div class="block-form">
-			<%= form_for(@user) do |f| %>
+			<%= form_for(@api_user) do |f| %>
 				<%= render 'shared/form_errors', object: f.object %>
 				<div>
 					<%= f.label :first_name %>

@@ -1,43 +1,43 @@
 module SessionsHelper
-    def sign_in user
-        session[:user_id] = user.id
+    def sign_in api_user
+        session[:api_user_id] = api_user.id
     end
 
-    def current_user
-        if(user_id = session[:user_id])
-            @current_user ||= User.find_by id: user_id
-        elsif(user_id = cookies.signed[:user_id])
-            user = User.find_by(id: user_id)
-            if user && user.authenticated?(cookies[:remember_token])
-                sign_in user
-                @current_user = user
+    def current_api_user
+        if(api_user_id = session[:api_user_id])
+            @current_api_user ||= ApiUser.find_by id: api_user_id
+        elsif(api_user_id = cookies.signed[:api_user_id])
+            api_user = ApiUser.find_by(id: api_user_id)
+            if api_user && api_user.authenticated?(cookies[:remember_token])
+                sign_in api_user
+                @current_api_user = api_user
             end
         end
     end
 
     def signed_in?
-        !current_user.nil?
+        !current_api_user.nil?
     end
 
     def sign_out
-        forget @current_user
-        session.delete :user_id
-        @current_user = nil
+        forget @current_api_user
+        session.delete :api_user_id
+        @current_api_user = nil
     end
 
-    def remember user
-        user.remember
-        cookies.permanent.signed[:user_id] = user.id
-        cookies.permanent[:remember_token] = user.remember_token
+    def remember api_user
+        api_user.remember
+        cookies.permanent.signed[:api_user_id] = api_user.id
+        cookies.permanent[:remember_token] = api_user.remember_token
     end
 
-    def forget user
-        user.forget
-        cookies.delete :user_id
+    def forget api_user
+        api_user.forget
+        cookies.delete :api_user_id
         cookies.delete :remember_token
     end
 
-    def current_user? user
-        user == current_user
+    def current_api_user? api_user
+        api_user == current_api_user
     end
 end

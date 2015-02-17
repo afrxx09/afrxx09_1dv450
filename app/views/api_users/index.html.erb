@@ -1,0 +1,37 @@
+<h2>api_users</h2>
+<div class="row">
+	<div class="col w100">
+		<div class="list">
+			<% @api_users.each do |u| %>
+				<div class="row">
+					<div class="col w25">
+						<%= u.first_name %> <%= u.last_name %>
+					</div>
+					<div class="col w25">
+						<%= u.email %>
+					</div>
+					<div class="col w50">
+						<% if !u.api_application.nil? %>
+							<div class="col w25">
+								<%= link_to('Api Application', api_application_path(u.api_application.id), :class => 'button button-blue') %>
+							</div>
+							<% if !u.api_application.api_keys.nil? %>
+								<div class="col w25">
+								<% u.api_application.api_keys.each do |api_key| %>
+									<% if api_key.revoked %>
+										<%= link_to('Activate Key', api_key_path(api_key), :class => 'button button-green', method: :update) %>	
+									<% else %>
+										<%= link_to('Revoke Key', api_key_path(api_key), :class => 'button button-red', method: :update) %>	
+									<% end %>
+								<% end %>
+								</div>div>
+							<% end %>
+						<% else %>
+							<span>No Application</span>	
+						<%end%>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

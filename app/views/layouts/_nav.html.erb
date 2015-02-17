@@ -2,10 +2,11 @@
 	<ul>
 		<li><%= link_to 'Home', root_path %></li>
 		<% if signed_in? %>
-			<% if current_user.admin? %>
-				<li><%= link_to 'Users', users_path %></li>
+			<% if current_api_user.admin? %>
+				<li><%= link_to 'Users', api_users_path %></li>
+			<% else %>
+				<li><%= link_to 'Account', api_user_path(current_api_user) %></li>
 			<% end %>
-			<li><%= link_to 'Account', user_path(current_user) %></li>
 			<li><%= link_to 'Sign out', sign_out_path, method: 'delete' %></li>
 		<% else %>
 			<li><%= link_to 'Sign up', sign_up_path %></li>

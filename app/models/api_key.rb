@@ -1,6 +1,8 @@
 class ApiKey < ActiveRecord::Base
-  belongs_to :user
-  validates :user_id, presence: true
+  belongs_to :api_application
+  has_many :api_requests
+  
+  validates :api_application_id, presence: true
   validates :key, presence: true
 
   def self.generate user

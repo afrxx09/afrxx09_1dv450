@@ -2,7 +2,7 @@
 	<div class="col w10">&nbsp;</div>
 	<div class="col w30">
 		<h2>Profile</h2>
-		<%= form_for(@user) do |f| %>
+		<%= form_for(@api_user) do |f| %>
 			<%= render 'shared/form_errors', object: f.object %>
 			<div class="block-form">
 				<%= f.label :first_name %>
@@ -31,16 +31,7 @@
 	</div>
 	<div class="col w10">&nbsp;</div>
 	<div class="col w50">
-		<h2>API KEY</h2>
-			<% if !@user.api_key.nil? %>
-				<p><%= @user.api_key.key %></p>
-				<p>
-					<%= link_to('Generate new API-key', api_keys_path, :class => 'button button-blue', method: :post) %> 
-					<%= link_to('Delete API-key', api_key_path(@user.id), :class => 'button button-red', method: :delete) %>
-				</p>
-			<% else %>
-				<p>currently no key</p>
-				<p><%= link_to('Generate API-key', api_keys_path, :class => 'button button-blue', method: :post) %></p>
-			<%end%>
+		<h2>Applications</h2>
+		<%= link_to('New Application', new_api_user_api_application_path(current_api_user.id), :class => 'button button-green') %>	
 	</div>
 </div>

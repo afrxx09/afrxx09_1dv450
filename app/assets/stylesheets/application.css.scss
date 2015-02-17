@@ -77,11 +77,16 @@ ul{
 }
 .block-form input[type="text"],
 .block-form input[type="password"],
-.block-form input[type="email"]{
+.block-form input[type="email"],
+.block-form textarea{
     width:100%;
     display:block;
     margin-left:-10px;
 }
+.block-form textarea{
+    min-height:75px;
+}
+
 input[type="submit"].block,
 button.block{
     display:block;
@@ -103,7 +108,8 @@ input:focus{
 }
 input[type="text"],
 input[type="password"],
-input[type="email"]{
+input[type="email"],
+textarea{
     padding:4px 8px;
     background-color:#f6f6f6;
     border:1px solid #bbb;
@@ -111,7 +117,8 @@ input[type="email"]{
 }
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="email"]:focus{
+input[type="email"]:focus,
+textarea:focus{
     background-color:$blue-0;
     border:1px solid $blue-3;
 }

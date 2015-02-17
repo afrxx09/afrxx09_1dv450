@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   private
-    def singed_in_user
+    def singed_in_api_user
       unless signed_in?
         flash[:fail] = "Please sign in"
         redirect_to sign_in_path
