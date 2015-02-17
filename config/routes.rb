@@ -9,9 +9,11 @@ Rails.application.routes.draw do
 	get 'sign_in' => 'sessions#new'
 	post 'sign_in' => 'sessions#create'
 	delete 'sign_out' => 'sessions#destroy'
-	resources :api_users, only: [:index, :new, :create, :show, :update] do
-		resources :api_applications, only: [:new, :create, :update, :show] do
-			resources :api_keys, only: [:create, :update]
-		end
+	
+	resources :api_users, only: [:index, :new, :create, :show, :update]
+	resources :api_applications, only: [:new, :create, :update, :show] do
+		resources :api_keys, only: [:create, :update]
+		resources :app_urls, only: [:create, :destroy]
 	end
+	
 end

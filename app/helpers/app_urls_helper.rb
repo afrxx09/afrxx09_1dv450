@@ -1,0 +1,2 @@
+module AppUrlsHelper
+end

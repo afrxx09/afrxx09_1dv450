@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col w50">
+		<h2>Api Application</h2>
+		<%= render 'form' %>
+	</div>
+	<div class="col w10">&nbsp;</div>
+	<div class="col w40">
+		<div>
+			<h3>API-key</h3>
+			<% if !@api_app.api_key.nil? %>
+				<%= @api_app.api_key.key %> <%= @api_app.api_key.revoked ? 'revoked' : 'active' %>
+			<% else %>
+				<%= link_to('Generate Api Key', api_application_api_keys_path(@api_app.id), :class => 'button button-blue', method: :post) %>
+			<% end %>
+		</div>
+		<div>
+			<h3>URL Sources</h3>
+			<p>Define URLs that the application uses. Only requests from these URLs will respond to API calls.</p>
+			<div>
+				<% if @api_app.app_urls.any? %>
+					<ul>
+					<% @api_app.app_urls.each do |u| %>
+						<li>
+							<%= u.url %>
+							<%= link_to('remove', api_application_app_urls_path(u.api_application.id, u.id), :class => 'button button-red', :method => :delete) %>
+						</li>
+					<% end %>
+					</ul>
+				<% else %>
+					<p>No URLs declared.</p>
+				<% end %>
+			</div>
+			<div>
+				<div>
+					<%= form_for [@api_app, @app_url] do |f| %>
+						<div>
+							<%= f.text_field :url %>
+							<%= f.button 'Add URL', class: "button button-blue", method: :post %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -11,21 +11,26 @@
 						<%= u.email %>
 					</div>
 					<div class="col w50">
-						<% if !u.api_application.nil? %>
-							<div class="col w25">
-								<%= link_to('Api Application', api_application_path(u.api_application.id), :class => 'button button-blue') %>
-							</div>
-							<% if !u.api_application.api_keys.nil? %>
-								<div class="col w25">
-								<% u.api_application.api_keys.each do |api_key| %>
-									<% if api_key.revoked %>
-										<%= link_to('Activate Key', api_key_path(api_key), :class => 'button button-green', method: :update) %>	
+						<% if !u.api_applications.nil? %>
+						
+							<% u.api_applications.each do |app| %>
+								<div class="col w50">
+									<%= link_to(app.name, api_application_path(app.id)) %>
+								</div>
+								<div class="col w50">
+									<% if !app.api_key.nil? %>
+										<% if app.api_key.revoked %>
+											<%= link_to('Activate Key', api_application_api_keys_path(app.id, app.api_key.id), :class => 'button button-green', method: :put) %>	
+										<% else %>
+											<%= link_to('Revoke Key', api_application_api_keys_path(app.id, app.api_key.id), :class => 'button button-red', method: :put) %>	
+										<% end %>
 									<% else %>
-										<%= link_to('Revoke Key', api_key_path(api_key), :class => 'button button-red', method: :update) %>	
+										No API-key
 									<% end %>
-								<% end %>
-								</div>div>
+								</div>
+							
 							<% end %>
+							
 						<% else %>
 							<span>No Application</span>	
 						<%end%>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217103710) do
+ActiveRecord::Schema.define(version: 20150217215426) do
 
   create_table "api_applications", force: true do |t|
     t.string   "name"
@@ -25,14 +25,13 @@ ActiveRecord::Schema.define(version: 20150217103710) do
 
   create_table "api_keys", force: true do |t|
     t.string   "key"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "revoked",    default: false
+    t.boolean  "revoked",            default: false
+    t.integer  "api_application_id"
   end
 
-  add_index "api_keys", ["user_id", "key"], name: "index_api_keys_on_user_id_and_key"
-  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
+  add_index "api_keys", ["api_application_id"], name: "index_api_keys_on_api_application_id"
 
   create_table "api_requests", force: true do |t|
     t.integer  "api_key_id"
@@ -57,5 +56,14 @@ ActiveRecord::Schema.define(version: 20150217103710) do
   end
 
   add_index "api_users", ["email"], name: "index_api_users_on_email", unique: true
+
+  create_table "app_urls", force: true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "api_application_id"
+  end
+
+  add_index "app_urls", ["api_application_id"], name: "index_app_urls_on_api_application_id"
 
 end

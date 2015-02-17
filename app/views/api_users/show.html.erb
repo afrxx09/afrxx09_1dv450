@@ -1,5 +1,4 @@
 <div class="row">
-	<div class="col w10">&nbsp;</div>
 	<div class="col w30">
 		<h2>Profile</h2>
 		<%= form_for(@api_user) do |f| %>
@@ -29,9 +28,30 @@
 			</div>
 		<% end %>
 	</div>
-	<div class="col w10">&nbsp;</div>
-	<div class="col w50">
+	
+	<div class="col w5">&nbsp;</div>
+	
+	<div class="col w60">
 		<h2>Applications</h2>
-		<%= link_to('New Application', new_api_user_api_application_path(current_api_user.id), :class => 'button button-green') %>	
+		<p>
+			<%= link_to('New Application', new_api_application_path, :class => 'button button-green') %>
+		</p>
+		<% current_api_user.api_applications.each do |app| %>
+			<div class="row">
+				<div class="col w25">
+					<span>
+						<%= link_to app.name, api_application_path(app.id) %>
+					</span>
+				</div>
+				
+				<div class="col w75">
+					<% if !app.api_key.nil? %>
+						<%= app.api_key.key %> <%= app.api_key.revoked ? 'revoked' : 'active' %>
+					<% else %>
+						<%= link_to('Generate Api Key', api_application_api_keys_path(app.id), :class => 'button button-blue', method: :post) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
 	</div>
 </div>

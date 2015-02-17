@@ -1,5 +1,5 @@
 <div class="block-form">
-	<%= form_for [@api_user, @api_app] do |f| %>
+	<%= form_for @api_app do |f| %>
 		<div>
 			<%= f.label :name %>
 			<%= f.text_field :name %>
@@ -9,7 +9,7 @@
 			<%= f.text_area :description %>
 		</div>
 		<div>
-			<%= f.submit "Sign up", class: "blue" %>
+			<%= f.submit "Save", class: "blue" %>
 		</div>
 	<% end %>
 </div>

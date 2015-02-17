@@ -39,6 +39,7 @@ class ApiUsersController < ApplicationController
 		def api_user_params
 			params.require(:api_user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
 		end
+		
 		def correct_api_user
 			@api_user = ApiUser.find(params[:id])
 			redirect_to(root_path) unless current_api_user?(@api_user)
