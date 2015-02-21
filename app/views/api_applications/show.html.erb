@@ -8,7 +8,11 @@
 		<div>
 			<h3>API-key</h3>
 			<% if !@api_app.api_key.nil? %>
-				<%= @api_app.api_key.key %> <%= @api_app.api_key.revoked ? 'revoked' : 'active' %>
+				<% if @api_app.api_key.revoked? %>
+					<span class="bg-red"><%= @api_app.api_key.key %> (revoked)</span>
+				<% else %>
+					@api_app.api_key.key
+				<% end %>
 			<% else %>
 				<%= link_to('Generate Api Key', api_application_api_keys_path(@api_app.id), :class => 'button button-blue', method: :post) %>
 			<% end %>
@@ -22,7 +26,7 @@
 					<% @api_app.app_urls.each do |u| %>
 						<li>
 							<%= u.url %>
-							<%= link_to('remove', api_application_app_urls_path(u.api_application.id, u.id), :class => 'button button-red', :method => :delete) %>
+							<%= link_to('remove', api_application_app_url_path(@api_app.id, u.id), :class => 'button button-red', method: :delete ) %>
 						</li>
 					<% end %>
 					</ul>

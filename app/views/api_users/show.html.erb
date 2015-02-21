@@ -46,9 +46,13 @@
 				
 				<div class="col w75">
 					<% if !app.api_key.nil? %>
-						<%= app.api_key.key %> <%= app.api_key.revoked ? 'revoked' : 'active' %>
+						<% if app.api_key.revoked? %>
+							<span class="bg-red"><%= app.api_key.key %> (revoked)</span>
+						<% else %>
+							app.api_key.key
+						<% end %>
 					<% else %>
-						<%= link_to('Generate Api Key', api_application_api_keys_path(app.id), :class => 'button button-blue', method: :post) %>
+						No API-key
 					<% end %>
 				</div>
 			</div>

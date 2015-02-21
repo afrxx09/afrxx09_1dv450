@@ -1,5 +1,6 @@
 <div class="block-form">
 	<%= form_for @api_app do |f| %>
+		<%= render 'shared/form_errors', object: f.object %>
 		<div>
 			<%= f.label :name %>
 			<%= f.text_field :name %>

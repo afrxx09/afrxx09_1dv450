@@ -19,10 +19,10 @@
 								</div>
 								<div class="col w50">
 									<% if !app.api_key.nil? %>
-										<% if app.api_key.revoked %>
-											<%= link_to('Activate Key', api_application_api_keys_path(app.id, app.api_key.id), :class => 'button button-green', method: :put) %>	
+										<% if app.api_key.revoked? %>
+											<%= link_to('Activate Key', api_application_api_key_path(app.id, app.api_key.id), :class => 'button button-green', method: :put) %>	
 										<% else %>
-											<%= link_to('Revoke Key', api_application_api_keys_path(app.id, app.api_key.id), :class => 'button button-red', method: :put) %>	
+											<%= link_to('Revoke Key', api_application_api_key_path(app.id, app.api_key.id), :class => 'button button-red', method: :put) %>	
 										<% end %>
 									<% else %>
 										No API-key
