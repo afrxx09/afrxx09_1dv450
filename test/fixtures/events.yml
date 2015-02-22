@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
+  position_id: 
+  user_id: 
+  comment: MyString
 
 two:
-  email: MyString
+  position_id: 
+  user_id: 
+  comment: MyString

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 	namespace :api, defaults: {format: 'json'} do
 		namespace :v1 do
 			resources :users
+			resources :places
+			resources :events
+			resources :tags
 		end
 	end
 	root 'static_pages#home'

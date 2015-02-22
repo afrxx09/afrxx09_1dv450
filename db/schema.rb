@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217215426) do
+ActiveRecord::Schema.define(version: 20150222222436) do
 
   create_table "api_applications", force: true do |t|
     t.string   "name"
@@ -65,5 +65,54 @@ ActiveRecord::Schema.define(version: 20150217215426) do
   end
 
   add_index "app_urls", ["api_application_id"], name: "index_app_urls_on_api_application_id"
+
+  create_table "events", force: true do |t|
+    t.integer  "position_id"
+    t.integer  "user_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["position_id"], name: "index_events_on_position_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "events_tags", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events_tags", ["event_id"], name: "index_events_tags_on_event_id"
+  add_index "events_tags", ["tag_id"], name: "index_events_tags_on_tag_id"
+
+  create_table "places", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "positions", force: true do |t|
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
