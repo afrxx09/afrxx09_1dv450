@@ -11,7 +11,7 @@
 				<% if @api_app.api_key.revoked? %>
 					<span class="bg-red"><%= @api_app.api_key.key %> (revoked)</span>
 				<% else %>
-					@api_app.api_key.key
+					<%= @api_app.api_key.key %>
 				<% end %>
 			<% else %>
 				<%= link_to('Generate Api Key', api_application_api_keys_path(@api_app.id), :class => 'button button-blue', method: :post) %>

@@ -1,6 +1,6 @@
 module Api
     module V1
-        class UsersController < ApplicationController
+        class TagsController < ApplicationController
             
             respond_to :json
             
@@ -8,15 +8,14 @@ module Api
             before_action :restrict_access, except: [:index, :show]
             
             def index
-                @users = User.all
-                respond_with @users
+                @tags = Tag.all
+                respond_with @tags
             end
 
             def show
-                @user = User.find(params[:id])
-                respond_with @user
+                @tag = Tag.find(params[:id])
+                respond_with @tag
             end
-            
             
         end
     end

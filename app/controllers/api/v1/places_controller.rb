@@ -1,6 +1,6 @@
 module Api
     module V1
-        class UsersController < ApplicationController
+        class PlacesController < ApplicationController
             
             respond_to :json
             
@@ -8,15 +8,14 @@ module Api
             before_action :restrict_access, except: [:index, :show]
             
             def index
-                @users = User.all
-                respond_with @users
+                @places = Place.all
+                respond_with @places
             end
 
             def show
-                @user = User.find(params[:id])
-                respond_with @user
+                @place = Place.find(params[:id])
+                respond_with @place
             end
-            
             
         end
     end

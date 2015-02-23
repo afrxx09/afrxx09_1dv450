@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
   end
 
   add_index "api_keys", ["api_application_id"], name: "index_api_keys_on_api_application_id"
+  add_index "api_keys", ["key"], name: "index_api_keys_on_key"
 
   create_table "api_requests", force: true do |t|
     t.integer  "api_key_id"
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
   create_table "events", force: true do |t|
     t.integer  "position_id"
     t.integer  "user_id"
+    t.integer  "place_id"
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
 
   add_index "events", ["position_id"], name: "index_events_on_position_id"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["place_id"], name: "index_events_on_place_id"
 
   create_table "events_tags", force: true do |t|
     t.integer  "event_id"
@@ -92,9 +95,13 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.string   "address"
     t.string   "city"
     t.string   "zip"
+    t.string   "google_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  add_index "places", ["name"], name: "index_places_on_name", unique: true
+  add_index "places", ["google_id"], name: "index_places_on_google_id", unique: true
 
   create_table "positions", force: true do |t|
     t.decimal  "lat"
@@ -102,17 +109,27 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  add_index "positions", ["lat"], name: "index_positions_on_lat"
+  add_index "positions", ["lng"], name: "index_positions_on_lng"
 
   create_table "tags", force: true do |t|
     t.string   "tag"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  add_index "tags", ["tag"], name: "index_tags_on_tag", unique: true
 
   create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

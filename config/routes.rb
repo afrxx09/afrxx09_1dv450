@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 			resources :places
 			resources :events
 			resources :tags
+			resources :positions
 		end
 	end
 	root 'static_pages#home'
