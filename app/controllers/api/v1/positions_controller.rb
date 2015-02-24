@@ -1,21 +1,22 @@
 module Api
     module V1
-        class PositionsController < ApplicationController
-            
-            respond_to :json
-            
-            rescue_from ActionController::UnknownFormat, with: :bad_req
-            before_action :restrict_access, except: [:index, :show]
+        class PositionsController < BaseApiController
             
             def index
-                @positions = Position.all
+                @positions = Positionlimit(@limit).offset(@offset).order(@order)
                 respond_with @positions
             end
-
+            
             def show
                 @position = Position.find(params[:id])
                 respond_with @position
             end
+            
+            private
+
+                def position_params
+                    params.require(:position).permit(:lat, :lng)
+                end
             
         end
     end

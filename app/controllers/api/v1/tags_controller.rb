@@ -1,21 +1,22 @@
 module Api
     module V1
-        class TagsController < ApplicationController
+        class TagsController < BaseApiController
             
-            respond_to :json
-            
-            rescue_from ActionController::UnknownFormat, with: :bad_req
-            before_action :restrict_access, except: [:index, :show]
-            
-            def index
-                @tags = Tag.all
+            def index                
+                @tags = Tag.limit(@limit).offset(@offset).order(@order)
                 respond_with @tags
             end
-
+            
             def show
                 @tag = Tag.find(params[:id])
                 respond_with @tag
             end
+            
+            private
+
+                def tag_params
+                    params.require(:tag).permit(:tag)
+                end
             
         end
     end

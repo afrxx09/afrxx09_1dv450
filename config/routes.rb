@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 			resources :events
 			resources :tags
 			resources :positions
+			match '*path', :to => 'base_api#routing_error', via: :all
 		end
 	end
 	root 'static_pages#home'
@@ -20,4 +21,5 @@ Rails.application.routes.draw do
 		resources :app_urls, only: [:create, :destroy]
 	end
 	
+	match '*path', to: 'static_pages#routing_error', via: :all
 end

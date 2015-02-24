@@ -1,21 +1,22 @@
 module Api
     module V1
-        class PlacesController < ApplicationController
-            
-            respond_to :json
-            
-            rescue_from ActionController::UnknownFormat, with: :bad_req
-            before_action :restrict_access, except: [:index, :show]
+        class PlacesController < BaseApiController
             
             def index
-                @places = Place.all
+                @places = limit(@limit).offset(@offset).order(@order)
                 respond_with @places
             end
-
+            
             def show
                 @place = Place.find(params[:id])
-                respond_with @place
+                respond_with @place 
             end
+                        
+            private
+
+                def place_params
+                    params.require(:place).permit(:name, :address, :city, :zip)
+                end
             
         end
     end
