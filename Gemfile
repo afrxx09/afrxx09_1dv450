@@ -11,6 +11,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
+gem 'jwt'
+
 group :development, :test do
   gem 'sqlite3'
 end

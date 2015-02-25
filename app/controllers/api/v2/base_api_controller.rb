@@ -1,8 +1,8 @@
 module Api
-    module V1
+    module V2
         class BaseApiController < ApplicationController
             protect_from_forgery with: :null_session
-            respond_to :json
+            respond_to :json, :xml
             
             before_action :validate_api_key
             before_action :limit_and_offset, only: [:index]
@@ -13,6 +13,16 @@ module Api
             #rescue_from ActionController::UnknownFormat, with: :bad_request
             #rescue_from ActionController::RoutingError, with: :bad_request
             
+            def authenticate
+                user = User.find_by(email: params[:email].downcase)
+                if user && user.authenticate(params[:password])
+                    token = encodeJWT user
+                    render json: { user: user, token: token }
+                else
+                    unauthorized "Invalid email/password combination"
+                end
+            end
+            
             def routing_error
                 bad_request
             end
@@ -20,17 +30,22 @@ module Api
             private
                 def bad_request message = nil
                     message ||= 'Bad request'
-                    respond_with message, status: 400
+                    render json: { error: message }, status: 400
                 end
                 
                 def not_found message = nil
                     message ||= 'Not found'
-                    respond_with message, status: 404
+                    render json: { error: message }, status: 404
                 end
                 
                 def unauthorized message = nil
                     message ||= 'Unauthorized'
-                    respond_with message, status: 401
+                    render json: { error: message }, status: 401
+                end
+                
+                def forbidden message = nil
+                    message ||= 'Forbidden'
+                    render json: { error: message }, status: 403
                 end
                 
                 def validate_api_key
@@ -45,16 +60,16 @@ module Api
                 end
                 
                 def limit_and_offset
-                    offset = 0
-                    limit = 5
                     if query_params[:offset].present?
                         @offset = query_params[:offset].to_i
                     end
                     if query_params[:limit].present?
                         @limit = query_params[:limit].to_i
                     end
-                    @offset ||= offset
-                    @limit ||= limit
+                    @offset ||= 0
+                    @limit ||= 25
+                    @next_offset = @limit + @offset
+                    @prev_offset = @limit - @offset
                 end
                 
                 def sort_order

@@ -40,4 +40,40 @@ module SessionsHelper
     def current_api_user? api_user
         api_user == current_api_user
     end
+    
+    ###### API STUFF
+    def api_auth
+        if request.headers["Authorization"].present?
+            auth_header = request.headers['Authorization'].split(' ').last
+            payload = decodeJWT auth_header.strip
+            if !payload
+                render json: { error: 'Incorrect token' }, status: 400
+            else
+                @current_user = User.find(payload[0]['user_id'])
+            end
+        else
+            render json: { error: 'No Authorization header' }, status: 403
+        end
+    end
+    
+    #def encodeJWT(user, exp=2.hours.from_now)
+    def encodeJWT user
+        payload = { user_id: user.id }
+        #payload[:exp] = exp.to_i
+        JWT.encode( payload, Rails.application.secrets.secret_key_base, "HS512")
+    end
+
+    def decodeJWT token
+        #payload = JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
+        JWT.decode(token, Rails.application.secrets.secret_key_base, "HS512")
+        rescue
+            false
+        #if payload[0]["exp"] >= Time.now.to_i
+        #    payload
+        #else
+        #    false
+        #end
+        #rescue => error
+        #    nil
+    end
 end
