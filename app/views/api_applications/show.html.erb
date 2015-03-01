@@ -1,10 +1,14 @@
 <div class="row">
+
 	<div class="col w50">
 		<h2>Api Application</h2>
 		<%= render 'form' %>
 	</div>
+	
 	<div class="col w10">&nbsp;</div>
+	
 	<div class="col w40">
+	
 		<div>
 			<h3>API-key</h3>
 			<% if !@api_app.api_key.nil? %>
@@ -17,6 +21,7 @@
 				<%= link_to('Generate Api Key', api_application_api_keys_path(@api_app.id), :class => 'button button-blue', method: :post) %>
 			<% end %>
 		</div>
+		
 		<div>
 			<h3>URL Sources</h3>
 			<p>Define URLs that the application uses. Only requests from these URLs will respond to API calls.</p>
@@ -45,5 +50,16 @@
 				</div>
 			</div>
 		</div>
+		
+		<div>
+			<h3>Statistics</h3>
+			<% r = @api_app.api_key.api_requests %>
+			<div>
+				Total requests: <%= r.any? ? r.count : 0 %>
+			</div>
+			
+		</div>
+		
 	</div>
+	
 </div>

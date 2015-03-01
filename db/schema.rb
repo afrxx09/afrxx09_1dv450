@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 20150222222436) do
 
   create_table "api_requests", force: true do |t|
     t.integer  "api_key_id"
+    t.string   "ip"
     t.string   "url"
-    t.string   "resource"
-    t.string   "action"
+    t.string   "host"
+    t.boolean  "is_valid_source"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

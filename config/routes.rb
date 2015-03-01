@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 			match '*path', :to => 'base_api#routing_error', via: :all
 		end
 		namespace :v2 do
+			get '/events/search/:query', to: 'events#search'
+			get '/events/nearby', to: 'events#nearby'
 			resources :events, only: [:index, :show, :create, :update, :destroy]
 			resources :users, only: [:index, :show, :create] do
 				resources :events, only: [:index]
@@ -20,8 +22,6 @@ Rails.application.routes.draw do
 			end
 			resources :places, only: [:index, :show, :create]
 			resources :positions, only: [:index, :show, :create]
-			
-			get '/events/search/:query', to: 'events#search'
 			
 			match '/authenticate', to: 'base_api#authenticate', via: 'post'
 			#Catch invalid URI's, let base Api Controller take care of it

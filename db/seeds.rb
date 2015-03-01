@@ -95,14 +95,14 @@ users.each do |u|
 	for i in 0..3
 		lat = rand 55.00..68.00
 		lng = rand 11.00..23.00
-		pos = Position.create!(lat: lat, lng: lng)
+		pos = Position.create!(lat: lat.round(4), lng: lng.round(4))
 		place = Place.offset(rand(Place.count)).first
 		event = Event.create!(user_id: user.id, position_id: pos.id, place_id: place.id, comment: 'comment:' + user.first_name )
 		
 		tag_count = rand 0..4
 		until tag_count <= 0 do
 			tag = Tag.offset(rand(Tag.count)).first
-			EventsTags.create(event_id: event.id, tag_id: tag.id)
+			EventsTag.create(event_id: event.id, tag_id: tag.id)
 			tag_count -= 1
 		end
 	end

@@ -15,6 +15,7 @@ module Api
             def create
                 user = User.new(user_params)
                 if user.save
+                    #Skapar inloggnings-token när användaren skapats
                     token = encodeJWT user
                     render json: { user: user, token: token }
                 else
