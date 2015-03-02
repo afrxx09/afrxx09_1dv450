@@ -55,7 +55,18 @@
 			<h3>Statistics</h3>
 			<% r = @api_app.api_key.api_requests %>
 			<div>
-				Total requests: <%= r.any? ? r.count : 0 %>
+				Total requests:<br />
+				<%= r.any? ? r.count : 0 %>
+			</div>
+			<div>
+				Valid requests:<br />
+				<% valid = r.where(is_valid_source: true) %>
+				<%= valid.any? ? valid.count : 0 %>
+			</div>
+			<div>
+				Requests from invalid hosts/URLs:<br />
+				<% invalid = r.where(is_valid_source: false) %>
+				<%= invalid.any? ? invalid.count : 0 %>
 			</div>
 			
 		</div>

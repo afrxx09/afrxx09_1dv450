@@ -13,13 +13,13 @@ module Api
             end
             
             def create
-                user = User.new(user_params)
-                if user.save
+                @user = User.new(user_params)
+                if @user.save
                     #Skapar inloggnings-token när användaren skapats
-                    token = encodeJWT user
-                    render json: { user: user, token: token }
+                    @token = encodeJWT @user
+                    respond_with @user, @token
                 else
-                    render json: { errors: user.errors }
+                    render json: { errors: @user.errors }
                 end
             end
                         

@@ -21,10 +21,8 @@ app = ApiApplication.create!(name: 'Test Application',
 api_key = ApiKey.create!(key: '524c94faf385b814ce22d7d83b73cbd3', api_application_id: app.id)
 
 app_urls = [
-	'http://localhost',
-	'https://localhost',
-	'http://172.0.0.1',
-	'https://172.0.0.1'
+	'localhost',
+	'172.0.0.1'
 ]
 
 app_urls.each do |u|

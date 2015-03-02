@@ -15,10 +15,10 @@ module Api
             
             #Method for authenticating users
             def authenticate
-                user = User.find_by(email: params[:email].downcase)
-                if user && user.authenticate(params[:password])
-                    token = encodeJWT user
-                    render json: { user: user, token: token }
+                @user = User.find_by(email: params[:email].downcase)
+                if @user && @user.authenticate(params[:password])
+                    @token = encodeJWT @user
+                    respond_with @user, @token
                 else
                     unauthorized "Invalid email/password combination"
                 end
@@ -62,6 +62,10 @@ module Api
                         #save every request made, for statistics and potential future limits
                         @api_key.api_requests.build(ip: request.remote_ip, url: request.url, host: request.host, is_valid_source: is_valid_source)
                         @api_key.save
+                        
+                        if !is_valid_source
+                            unauthorized "The request was made from a un-trustworthy source"
+                        end
                     end
                 end
                 
@@ -80,6 +84,7 @@ module Api
                     end
                     @offset ||= 0
                     @limit ||= 25
+                    @limit = @limit > 100 ? 100 : @limit #max limit 100
                     @next_offset = @limit + @offset
                     @prev_offset = @limit - @offset
                 end
