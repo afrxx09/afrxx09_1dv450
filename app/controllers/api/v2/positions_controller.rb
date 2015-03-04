@@ -4,7 +4,7 @@ module Api
             before_action :api_auth, only: [:create]
             
             def index
-                @positions = Positionlimit(@limit).offset(@offset).order(@order)
+                @positions = Position.limit(@limit).offset(@offset).order(@order)
                 respond_with @positions
             end
             
