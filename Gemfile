@@ -12,6 +12,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'jwt'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'sqlite3'
