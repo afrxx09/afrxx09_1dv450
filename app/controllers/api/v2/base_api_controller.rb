@@ -15,7 +15,8 @@ module Api
             
             #Method for authenticating users
             def authenticate
-                @user = User.find_by(email: params[:email].downcase)
+                email = params[:email] || ''
+                @user = User.find_by(email: email.downcase)
                 if @user && @user.authenticate(params[:password])
                     @token = encodeJWT @user
                     respond_with @user, @token
@@ -86,7 +87,7 @@ module Api
                     @limit ||= 25
                     @limit = @limit > 100 ? 100 : @limit #max limit 100
                     @next_offset = @limit + @offset
-                    @prev_offset = @limit - @offset
+                    @prev_offset = @offset - @limit
                 end
                 
                 #Define sort order for the requested data-set

@@ -18,6 +18,6 @@ if @users.count == @limit
 	json.next api_v2_users_url(offset: @next_offset, limit: @limit)
 end
 
-if @users.count < @limit && @offset > 0
+if @offset > 0
 	json.prev api_v2_users_url(offset: @prev_offset, limit: @limit)
 end

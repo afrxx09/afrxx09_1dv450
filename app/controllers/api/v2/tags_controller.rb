@@ -1,7 +1,6 @@
 module Api
     module V2
         class TagsController < BaseApiController
-            
             before_action :api_auth, only: [:create]
             
             def index                

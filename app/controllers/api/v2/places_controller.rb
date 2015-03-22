@@ -4,7 +4,7 @@ module Api
             before_action :api_auth, only: [:create]
             
             def index
-                @places = limit(@limit).offset(@offset).order(@order)
+                @places = Place.limit(@limit).offset(@offset).order(@order)
                 respond_with @places
             end
             
@@ -14,7 +14,7 @@ module Api
             end
             
             def create
-                place = Position.new(place_params)
+                place = Place.new(place_params)
                 if place.save
                     render json: { place: place }, status: :created
                 else
