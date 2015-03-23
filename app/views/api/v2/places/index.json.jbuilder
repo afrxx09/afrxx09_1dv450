@@ -4,6 +4,8 @@ json.places @places do |place|
 	json.address place.address
 	json.city place.city
 	json.zip place.zip
+	json.lat place.lat
+	json.lng place.lng
 end
 
 if @places.count == @limit

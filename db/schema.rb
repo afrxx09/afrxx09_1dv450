@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222222436) do
+ActiveRecord::Schema.define(version: 20150323200422) do
 
   create_table "api_applications", force: true do |t|
     t.string   "name"
@@ -77,9 +77,9 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.datetime "updated_at"
   end
 
+  add_index "events", ["place_id"], name: "index_events_on_place_id"
   add_index "events", ["position_id"], name: "index_events_on_position_id"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
-  add_index "events", ["place_id"], name: "index_events_on_place_id"
 
   create_table "events_tags", force: true do |t|
     t.integer  "event_id"
@@ -99,10 +99,12 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.string   "google_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "lat"
+    t.decimal  "lng"
   end
-  
-  add_index "places", ["name"], name: "index_places_on_name", unique: true
+
   add_index "places", ["google_id"], name: "index_places_on_google_id", unique: true
+  add_index "places", ["name"], name: "index_places_on_name", unique: true
 
   create_table "positions", force: true do |t|
     t.decimal  "lat"
@@ -110,7 +112,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-  
+
   add_index "positions", ["lat"], name: "index_positions_on_lat"
   add_index "positions", ["lng"], name: "index_positions_on_lng"
 
@@ -119,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-  
+
   add_index "tags", ["tag"], name: "index_tags_on_tag", unique: true
 
   create_table "users", force: true do |t|
@@ -130,7 +132,7 @@ ActiveRecord::Schema.define(version: 20150222222436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-  
+
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

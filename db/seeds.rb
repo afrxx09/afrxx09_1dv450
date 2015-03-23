@@ -76,15 +76,17 @@ places = [
 	'Emajagua'
 ]
 places.each do |p|
-	Place.create!(name: p)
+	lat = rand 55.00..68.00
+	lng = rand 11.00..23.00
+	Place.create!(name: p, lat: lat, lng: lng)
 end
 
 users = [
-	{email: 'user1@test.com', first_name: 'A-firstname', last_name: 'last', password: 'password', password_confirmation: 'password'},
-	{email: 'user2@test.com', first_name: 'B-firstname', last_name: 'last', password: 'password', password_confirmation: 'password'},
-	{email: 'user3@test.com', first_name: 'C-firstname', last_name: 'last', password: 'password', password_confirmation: 'password'},
-	{email: 'user4@test.com', first_name: 'D-firstname', last_name: 'last', password: 'password', password_confirmation: 'password'},
-	{email: 'user5@test.com', first_name: 'E-firstname', last_name: 'last', password: 'password', password_confirmation: 'password'}
+	{email: 'user1@test.com', first_name: 'Anna', last_name: 'Andersson', password: 'password', password_confirmation: 'password'},
+	{email: 'user2@test.com', first_name: 'Bertil', last_name: 'Bokmal', password: 'password', password_confirmation: 'password'},
+	{email: 'user3@test.com', first_name: 'Claus', last_name: 'Carpenter', password: 'password', password_confirmation: 'password'},
+	{email: 'user4@test.com', first_name: 'Diana', last_name: 'Daniels', password: 'password', password_confirmation: 'password'},
+	{email: 'user5@test.com', first_name: 'Edmund', last_name: 'El pollo loco', password: 'password', password_confirmation: 'password'}
 ]
 
 tags = Tag.all

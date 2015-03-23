@@ -30,7 +30,10 @@ module Api
                         name: params[:name],
                         address: params[:address],
                         city: params[:city],
-                        zip: params[:zip]
+                        zip: params[:zip],
+                        google_id: params[:google_id],
+                        lat: params[:lat],
+                        lng: params[:lng]
                     }
                 end
             
