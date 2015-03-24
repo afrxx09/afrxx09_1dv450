@@ -7,6 +7,7 @@ json.url api_v2_user_url(@user)
 json.events @user.events do |event|
 	json.id event.id
 	json.comment event.comment
+	json.created event.created_at
 	
 	json.url api_v2_event_url(event)
 end	
