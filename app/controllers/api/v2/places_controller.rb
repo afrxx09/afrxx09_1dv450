@@ -21,6 +21,11 @@ module Api
                     render json: { error: place.errors }, status: 400
                 end
             end
+            
+            def google_place_id
+                @place = Place.find_by google_place_id: params[:google_place_id]
+                respond_with @place
+            end
                         
             private
 
@@ -31,7 +36,7 @@ module Api
                         address: params[:address],
                         city: params[:city],
                         zip: params[:zip],
-                        google_id: params[:google_id],
+                        google_place_id: params[:google_place_id],
                         lat: params[:lat],
                         lng: params[:lng]
                     }

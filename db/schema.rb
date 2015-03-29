@@ -92,18 +92,19 @@ ActiveRecord::Schema.define(version: 20150323200422) do
   add_index "events_tags", ["tag_id"], name: "index_events_tags_on_tag_id"
 
   create_table "places", force: true do |t|
+    t.string   "google_place_id"
     t.string   "name"
     t.string   "address"
     t.string   "city"
     t.string   "zip"
-    t.string   "google_id"
+    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "lat"
     t.decimal  "lng"
   end
 
-  add_index "places", ["google_id"], name: "index_places_on_google_id", unique: true
+  add_index "places", ["google_place_id"], name: "index_places_on_google_place_id", unique: true
   add_index "places", ["name"], name: "index_places_on_name", unique: true
 
   create_table "positions", force: true do |t|

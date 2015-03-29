@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 		namespace :v2 do
 			get '/events/search/:query', to: 'events#search'
 			get '/events/nearby', to: 'events#nearby'
+			get '/events/google_place_id/:google_place_id', to: 'events#google_place_id'
 			resources :events, only: [:index, :show, :create, :update, :destroy]
 			resources :users, only: [:index, :show, :create] do
 				resources :events, only: [:index]
@@ -20,7 +21,11 @@ Rails.application.routes.draw do
 			resources :tags, only: [:index, :show, :create] do
 				resources :events, only: [:index]
 			end
-			resources :places, only: [:index, :show, :create]
+			get '/places/google_place_id/:google_place_id', to: 'places#google_place_id'
+			resources :places, only: [:index, :show, :create] do
+				resources :events, only: [:index]
+			end
+			
 			resources :positions, only: [:index, :show, :create]
 			
 			match '/authenticate', to: 'base_api#authenticate', via: 'post'

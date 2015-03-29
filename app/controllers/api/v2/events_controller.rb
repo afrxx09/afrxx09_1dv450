@@ -11,6 +11,8 @@ module Api
                     @events = Place.find(params[:place_id]).events.limit(@limit).offset(@offset).order(@order)
                 elsif params[:tag_id].present? #By tag_id
                     @events = Tag.find(params[:tag_id]).events.limit(@limit).offset(@offset).order(@order)
+                elsif params[:google_place_id].present? #By_google_place_id
+                    @events = Place.find_by(google_place_id: params[:google_place_id]).events.limit(@limit).offset(@offset).order(@order)
                 else #regular
                     @events = Event.includes([:user, :place, :tags]).limit(@limit).offset(@offset).order(@order)
                 end
@@ -102,7 +104,11 @@ module Api
                     bad_request "Nearby search needs parameters for Latitude(lat) and Longitude(lng)."
                 end
             end
-
+            
+            def google_place_id
+                @events = Place.find_by(google_place_id: params[:google_place_id]).events.limit(@limit).offset(@offset).order(@order)
+                respond_with @events, status: :ok
+            end
             
             private
 

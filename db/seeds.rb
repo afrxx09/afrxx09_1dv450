@@ -48,38 +48,11 @@ tags.each do |t|
 	Tag.create!(tag: t)
 end
 
-places = [
-	'Oxoboxo River',
-	'Lennon',
-	'Magazine',
-	'El Tumbao',
-	'Dodgeville',
-	'Science Hill',
-	'Deerwood',
-	'Howards Grove',
-	'Lowden',
-	'Grandyle Village',
-	'Millcreek',
-	'Deer Lodge',
-	'Saronville',
-	'Kingsland',
-	'Meadowbrook Terrace',
-	'Rothville',
-	'Bruceton',
-	'Cabazon',
-	'Oketo',
-	'Wilton Manors',
-	'Bowie',
-	'Grand Forks',
-	'Alvordton',
-	'Pilot Mound',
-	'Emajagua'
-]
-places.each do |p|
-	lat = rand 55.00..68.00
-	lng = rand 11.00..23.00
-	Place.create!(name: p, lat: lat, lng: lng)
-end
+Place.create!(google_place_id: 'ChIJZYhcYUoyUkYRe3ieF7EnGMo', name: 'Evil Twins Heavenly Tattoo Studio', lng: 12.698149999999941, lat:56.045162);
+Place.create!(google_place_id: 'ChIJCf-iLY0jV0YR8esLkZY8ZAc', name: 'Old Sailor Tattoo', lng: 14.805115999999998, lat: 56.87973);
+Place.create!(google_place_id: 'ChIJFWzJKfMjV0YRjvUHCcN2W9M', name: 'Wild Tattoo Art', lng: 14.803744000000052, lat:56.877809);
+Place.create!(google_place_id: 'ChIJv0oCCWXRV0YRcuBOJ7ksDFw', name: 'Black Diamond Tattoo AB', lng: 16.363990000000058, lat:56.665348);
+Place.create!(google_place_id: 'ChIJl-iAhWTRV0YRBhEZtnooyv4', name: 'Diegos Tattoo AB', lng: 16.36170100000004, lat:56.662568);
 
 users = [
 	{email: 'user1@test.com', first_name: 'Anna', last_name: 'Andersson', password: 'password', password_confirmation: 'password'},
@@ -93,11 +66,9 @@ tags = Tag.all
 users.each do |u|
 	user = User.create!(u)
 	for i in 0..3
-		lat = rand 55.00..68.00
-		lng = rand 11.00..23.00
-		pos = Position.create!(lat: lat.round(4), lng: lng.round(4))
 		place = Place.offset(rand(Place.count)).first
-		event = Event.create!(user_id: user.id, position_id: pos.id, place_id: place.id, comment: 'comment:' + user.first_name )
+		pos = Position.create!(lat: place.lat.round(5), lng: place.lng.round(5))
+		event = Event.create!(user_id: user.id, position_id: pos.id, place_id: place.id, comment: 'My comment on: ' + place.name )
 		
 		tag_count = rand 0..4
 		until tag_count <= 0 do
