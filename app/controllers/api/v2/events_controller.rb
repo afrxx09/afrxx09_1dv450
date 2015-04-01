@@ -48,6 +48,7 @@ module Api
                 tags = @event.comment.scan(/#\S+/)
                 
                 tags.each do |t| #itterate found tags
+                    t = t.delete '#'
                     existing_tag = Tag.find_by(tag: t) #Check if tag already exists
                     if !existing_tag.nil?
                         @event.tags << existing_tag #add existing tag
@@ -106,8 +107,14 @@ module Api
             end
             
             def google_place_id
-                @events = Place.find_by(google_place_id: params[:google_place_id]).events.limit(@limit).offset(@offset).order(@order)
-                respond_with @events, status: :ok
+                
+                place = Place.find_by(google_place_id: params[:google_place_id])
+                if place.nil?
+                    render json: { error: 'Could not find any places with that google_place_id' }, status: 404
+                else
+                    @events = place.events.limit(@limit).offset(@offset).order(@order)
+                    respond_with @events, status: :ok
+                end
             end
             
             private

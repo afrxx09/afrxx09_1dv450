@@ -34,3 +34,5 @@ json.tags @event.tags do |tag|
 	json.tag tag.tag
 	json.url api_v2_tag_url(tag)
 end
+
+json.created @event.created_at
